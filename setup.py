@@ -23,6 +23,12 @@ setup(
     version=get_version(),
     description='Helper for working with lua scripts.',
     packages=find_packages(),
+    author='Michael Hahn',
+    author_email='mwhahn@gmail.com',
+    url='https://github.com/mhahn/curator/',
+    download_url='https://github.com/mhahn/curator/tarball/%s' % (
+        get_version(),
+    ),
     setup_requires=[
         'nose>=1.0',
         'coverage>=1.0',
@@ -33,4 +39,5 @@ setup(
         'redis==2.10.1',
         'jinja2==2.7.2',
     ],
+    keywords=['redis', 'lua'],
 )
