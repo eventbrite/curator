@@ -1,0 +1,1 @@
+https://pypi.python.org/packages/source/i/invoke/invoke-0.5.0.tar.gz#md5=053082617d8721ddcb3cf61780f8e747
