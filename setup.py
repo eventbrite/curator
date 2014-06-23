@@ -19,7 +19,7 @@ def get_version():
             return m.groups()[0]
 
 setup(
-    name='curator',
+    name='redis-lua-curator',
     version=get_version(),
     description='Helper for working with lua scripts.',
     packages=find_packages(),
