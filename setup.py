@@ -1,12 +1,26 @@
+import os
+import re
+
 from setuptools import (
     find_packages,
     setup,
 )
-from curator import __version__
+
+version_re = re.compile(r"__version__\s*=\s*['\"](.*?)['\"]")
+
+
+def get_version():
+    base = os.path.abspath(os.path.dirname(__file__))
+    with open(os.path.join(base, 'curator/__init__.py')) as initf:
+        for line in initf:
+            m = version_re.match(line.strip())
+            if not m:
+                continue
+            return m.groups()[0]
 
 setup(
     name='curator',
-    version=__version__,
+    version=get_version(),
     description='Helper for working with lua scripts.',
     packages=find_packages(),
     setup_requires=[

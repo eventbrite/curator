@@ -18,7 +18,7 @@ def base_directory():
 @task
 def test(failfast=False):
     with base_directory():
-        command = 'python setup.py nosetests --with-coverage --cover-erase --cover-package=wolverine'
+        command = 'python setup.py nosetests --with-coverage --cover-erase --cover-package=curator'
         if failfast:
             command += ' -x'
         run(command, pty=True)

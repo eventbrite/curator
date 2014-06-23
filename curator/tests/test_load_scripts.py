@@ -1,10 +1,6 @@
 import unittest
 
-from curator import curator
-from jinja2 import (
-    Environment,
-    PackageLoader,
-)
+from curator import Curator
 from redis import Redis
 
 
@@ -20,13 +16,18 @@ class ScriptLoadingTests(unittest.TestCase):
             existing_keys,
             'Redis database "%s" must be empty to run these tests' % (TEST_DB,)
         )
-        curator.configure_package('curator', 'tests/sample_lua')
-        curator.set_redis_client(self.redis)
+        self.curator = Curator('curator', 'tests/sample_lua', self.redis)
 
     def tearDown(self):
-        self.client.flushdb()
+        self.redis.flushdb()
+        self.redis.script_flush()
 
     def test_load_mexists(self):
-        curator = Curator('curator', 'tests/sample_lua')
-        result = curator.util.exists.mexists(['key0', 'key2', 'key3'])
+        result = self.curator.util.exists.mexists(
+            keys=['key0', 'key2', 'key3'],
+        )
         self.assertEqual(result, [0, 0, 0])
+
+    def test_load_lua_include_partial(self):
+        result = self.curator.util.include()
+        self.assertEqual(result, 1)
