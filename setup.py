@@ -22,7 +22,12 @@ setup(
     name='redis-lua-curator',
     version=get_version(),
     description='Helper for working with lua scripts.',
-    packages=find_packages(exclude=['tests']),
+    packages=find_packages(exclude=[
+        "*.tests",
+        "*.tests.*",
+        "tests.*",
+        "tests",
+    ]),
     author='Michael Hahn',
     author_email='mwhahn@gmail.com',
     url='https://github.com/mhahn/curator/',
