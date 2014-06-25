@@ -32,8 +32,6 @@ setup(
     setup_requires=[
         'nose>=1.0',
         'coverage>=1.0',
-        'ipython==0.13.2',
-        'ipdb==0.8',
     ],
     install_requires=[
         'redis==2.10.1',
