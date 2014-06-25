@@ -31,6 +31,13 @@ class ScriptLoadingTests(unittest2.TestCase):
         )
         self.assertEqual(result, [0, 0, 0])
 
+    def test_util_mexists(self):
+        self.redis.set('key1', 'value')
+        result = self.curator.util.exists.mexists(
+            keys=['key0', 'key1', 'key2'],
+        )
+        self.assertEqual(result, [0, 1, 0])
+
     def test_load_lua_include_partial(self):
         result = self.curator.util.include()
         self.assertEqual(result, 1)
