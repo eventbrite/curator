@@ -58,3 +58,7 @@ class ScriptLoadingTests(unittest2.TestCase):
         with self.assertRaises(ScriptNotFound) as e:
             self.curator.invalid.path.to.script(keys=['key1'])
         self.assertEqual(e.exception.path, 'invalid/path/to/script')
+
+    def test_load_script_base_dir(self):
+        result = self.curator.base()
+        self.assertEqual(result, 1)

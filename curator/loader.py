@@ -44,13 +44,22 @@ class PathComponent(object):
         except AttributeError:
             path = os.path.join(self._path, attr)
             try:
-                return LuaScript(
-                    self._redis,
-                    self._env.get_template(path),
-                    self._cache,
-                )
+                return self._load_script(path)
             except IOError:
                 return PathComponent(self._env, self._redis, self._cache, path)
 
     def __call__(self, *args, **kwargs):
-        raise ScriptNotFound('No lua script found at path', path=self._path)
+        try:
+            return self._load_script(self._path)(*args, **kwargs)
+        except IOError:
+            raise ScriptNotFound(
+                'No lua script found at path',
+                path=self._path,
+            )
+
+    def _load_script(self, path):
+        return LuaScript(
+            self._redis,
+            self._env.get_template(path),
+            self._cache,
+        )
