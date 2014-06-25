@@ -1,4 +1,4 @@
-import unittest
+import unittest2
 
 from curator import Curator
 from redis import Redis
@@ -7,7 +7,7 @@ from redis import Redis
 TEST_DB = 10
 
 
-class ScriptLoadingTests(unittest.TestCase):
+class ScriptLoadingTests(unittest2.TestCase):
 
     def setUp(self):
         self.redis = Redis(db=TEST_DB)
