@@ -32,6 +32,7 @@ setup(
     setup_requires=[
         'nose>=1.0',
         'coverage>=1.0',
+        'mock==1.0.1',
         'unittest2==0.5.1',
     ],
     install_requires=[

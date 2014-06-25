@@ -16,9 +16,10 @@ class Curator(object):
             loader=LuaPackageLoader(package, scripts_dir),
         )
         self.redis = redis_client
+        self.cache = {}
 
     def __getattribute__(self, attr):
         try:
             return object.__getattribute__(self, attr)
         except AttributeError:
-            return PathComponent(self.env, self.redis, attr)
+            return PathComponent(self.env, self.redis, self.cache, attr)

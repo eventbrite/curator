@@ -5,14 +5,19 @@ from redis.exceptions import NoScriptError
 
 class LuaScript(object):
 
-    def __init__(self, redis, template):
+    def __init__(self, redis, template, cache):
         self.redis = redis
         self.template = template
+        self.cache = cache
         self.script = self._render_template(template)
 
     def _render_template(self, template):
-        # TODO try and fetch this from the curator cache
-        return template.render()
+        if template.filename in self.cache:
+            script = self.cache[template.filename]
+        else:
+            script = template.render()
+            self.cache[template.filename] = script
+        return script
 
     def _get_script_sha(self):
         return hashlib.sha1(self.script).hexdigest()
