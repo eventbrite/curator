@@ -1,6 +1,6 @@
 import hashlib
 
-from redis.exceptions import NoScriptError
+from redis.exceptions import ResponseError
 
 
 class LuaScript(object):
@@ -30,6 +30,6 @@ class LuaScript(object):
         keys_and_args = keys + arguments
         try:
             response = self.redis.evalsha(script_sha, num_keys, *keys_and_args)
-        except NoScriptError:
+        except ResponseError:
             response = self.redis.eval(self.script, num_keys, *keys_and_args)
         return response
