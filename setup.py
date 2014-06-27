@@ -41,7 +41,7 @@ setup(
         'unittest2==0.5.1',
     ],
     install_requires=[
-        'redis==2.10.1',
+        'redis >= 2.8.0, <= 2.10.1',
         'jinja2==2.7.2',
     ],
     keywords=['redis', 'lua'],
